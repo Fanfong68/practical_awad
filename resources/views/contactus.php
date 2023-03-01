@@ -1,0 +1,4 @@
+<x-header data="Contact Us" />
+<h1>Contact Us</h1>
+<a href="home">Home</a>
+<a href="about">About Us</a>
