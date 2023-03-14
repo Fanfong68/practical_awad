@@ -22,9 +22,11 @@ Route::get('/', function () {
     return redirect('home');
 });
 
-Route::get('/home', function () {
-    return view('home');
-});
+// Route::get('/home', function () {
+//     return view('home');
+// });
+
+Route::view("home", 'welcome');
 
 Route::get('/about', function () {
     return view('aboutus');
@@ -52,8 +54,23 @@ Route::post('signUp', [Users::class,'signUp']);
 Route::get('showOne', [Users::class,'OneToOne']);
 Route::get('showMany', [Users::class,'OneToMany']);
 
-Route::view('login','login')->middleware('protectedPage');
+// Route::view('login','login')->middleware('protectedPage'); 
+Route::get("login", function(){
+    if(session()->has('user'))
+    {
+        return redirect("home");
+    }
+    return view('login');
+});
 Route::post('login', [Users::class,'login']);
+
+Route::get("logout", function(){
+    if(session()->has('user'))
+    {
+        session()->pull('user');
+    }
+    return redirect('login');
+});
 
 Route::view('noaccess','noaccess');
 

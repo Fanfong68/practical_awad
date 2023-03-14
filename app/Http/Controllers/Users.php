@@ -9,12 +9,14 @@ use App\Models\Company;
 
 class Users extends Controller
 {
-    function logIn(Request $req){
+    function login(Request $req){
         $req->validate([
-            'email' => 'required | max:10',
+            'username' => 'required | max:10',
             'password' => 'required | min:5'
         ]); 
-        return $req->input();
+        $data = $req->input();
+        $req->session()->put('user', $data['username']);
+        return redirect("home");
     }
 
     function signUp(Request $req){
